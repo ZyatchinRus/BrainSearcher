@@ -5,6 +5,8 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import Entities.*;
 public class ClientEntityManager{
+
+    private ClassLoader classLoader = new ClassLoader();
     public EntityManager em = Persistence.createEntityManagerFactory("brainSearcher").createEntityManager();
 
     public Client add(Client client){
@@ -19,7 +21,13 @@ public class ClientEntityManager{
         em.remove(get(id));
         em.getTransaction().commit();
     }
-
+    public Client getByLogin(String login){
+        TypedQuery namedQuery = em.createNamedQuery("Client.getByLogin",Client.class);
+        namedQuery.setParameter("login",login);
+        List<Client> client = namedQuery.getResultList();
+        if(client.isEmpty())return null;
+        return client.get(0);
+    }
     public Client get(int id){
         return em.find(Client.class, id);
     }

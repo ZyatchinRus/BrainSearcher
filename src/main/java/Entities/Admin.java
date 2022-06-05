@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @NamedQuery(name = "Admin.getAll",query = "select c from Admin c")
+@NamedQuery(name = "Admin.getByLogin",query = "select c from Admin c WHERE login=:login")
 @Table(name = "\"Admin\"")
 public class Admin {
     @Id
@@ -12,11 +13,12 @@ public class Admin {
     private Integer id;
 
 
+
     @Column(name = "\"Name\"", nullable = false)
     private String name;
 
 
-    @Column(name = "\"Login\"", nullable = false)
+    @Column(name = "\"login\"", nullable = false)
     private String login;
 
 

@@ -6,6 +6,8 @@ import java.util.List;
 import Entities.*;
 
 public class EmployerEntityManager {
+
+    private ClassLoader classLoader = new ClassLoader();
     public EntityManager em = Persistence.createEntityManagerFactory("brainSearcher").createEntityManager();
 
     public Employer add(Employer employer){
@@ -30,7 +32,13 @@ public class EmployerEntityManager {
         em.merge(employer);
         em.getTransaction().commit();
     }
-
+    public Employer getByLogin(String login){
+        TypedQuery namedQuery = em.createNamedQuery("Employer.getByLogin",Employer.class);
+        namedQuery.setParameter("login",login);
+        List<Employer> employer = namedQuery.getResultList();
+        if(employer.isEmpty())return null;
+        return employer.get(0);
+    }
     public List<Employer> getAll(){
         TypedQuery<Employer> namedQuery = em.createNamedQuery("Employer.getAll", Employer.class);
         return namedQuery.getResultList();

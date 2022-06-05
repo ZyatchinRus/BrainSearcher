@@ -6,6 +6,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "\"Employer\"")
 @NamedQuery(name = "Employer.getAll",query = "select c from Employer c")
+@NamedQuery(name = "Employer.getByLogin",query = "select c from Employer c WHERE login=:login")
 public class Employer {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -24,7 +25,7 @@ public class Employer {
     private String email;
 
 
-    @Column(name = "\"Login\"", nullable = false)
+    @Column(name = "\"login\"", nullable = false)
     private String login;
 
 

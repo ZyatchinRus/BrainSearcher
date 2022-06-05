@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 @NamedQuery(name = "Client.getAll",query = "select c from Client c")
+@NamedQuery(name = "Client.getByLogin",query = "select c from Client c WHERE login=:login")
 @Table(name = "\"Client\"")
 public class Client {
     @Id
@@ -24,7 +25,7 @@ public class Client {
     private String email;
 
 
-    @Column(name = "\"Login\"", nullable = false)
+    @Column(name = "\"login\"", nullable = false)
     private String login;
 
 

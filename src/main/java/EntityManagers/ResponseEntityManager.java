@@ -6,6 +6,8 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import Entities.*;
 public class ResponseEntityManager {
+
+    private ClassLoader classLoader = new ClassLoader();
     public EntityManager em = Persistence.createEntityManagerFactory("brainSearcher").createEntityManager();
 
     public Response add(Response response){

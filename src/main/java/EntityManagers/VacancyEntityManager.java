@@ -6,6 +6,8 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class VacancyEntityManager {
+
+    private ClassLoader classLoader = new ClassLoader();
     public EntityManager em = Persistence.createEntityManagerFactory("brainSearcher").createEntityManager();
 
     public void add(Vacancy vacancy){
