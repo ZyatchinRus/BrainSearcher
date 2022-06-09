@@ -4,16 +4,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Set;
 
 public class VacancyEntityManager {
 
     private ClassLoader classLoader = new ClassLoader();
     public EntityManager em = Persistence.createEntityManagerFactory("brainSearcher").createEntityManager();
 
-    public void add(Vacancy vacancy){
+    public Vacancy add(Vacancy vacancy){
         em.getTransaction().begin();
-        em.merge(vacancy);
+        vacancy=em.merge(vacancy);
         em.getTransaction().commit();
+        return vacancy;
     }
 
     public void delete(int id){

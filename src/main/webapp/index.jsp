@@ -5,10 +5,10 @@
     <title>BrainSearcher</title>
 </head>
 <body>
-<link rel="stylesheet" type="text/css" href="pages/styles.css">
+<link rel="stylesheet" type="text/css" href="designe/styles.css">
 <header>
     <div class="logotip">
-        <img src="pages/brainLogo.svg" height="50px" width="50px"/>
+        <img src="designe/brainLogo.svg" height="50px" width="50px"/>
         <a href="\">BrainSearcher</a>
         <hr>
     </div>
@@ -16,12 +16,12 @@
 <div class="photoMain1">
         <div class="form">
             <h1>Вход</h1>
-            <form method="post" action="/index">
+            <form method="post">
                 <div class ="input-form">
-                    <input type = "text" placeholder = "Логин" name="login">
+                    <input type = "text" required placeholder = "Логин" name="login">
                 </div>
                 <div class ="input-form">
-                    <input type = "password" placeholder = "Пароль" name="password">
+                    <input type = "password" required placeholder = "Пароль" name="password">
                 </div>
                 <div class = "form-reg"><button type = submit name = "entry">Войти</button></div>
             </form>
@@ -30,12 +30,12 @@
                 <input type="checkbox" id="mod">
                 <label class="btn" for="mod">Зарегистрироваться</label>
                 </br>
-                <form action="" class="popup">
+                <form class="popup">
                     </br>
-                    <a href="Frontend/employerRegistration.jsp" class = "btn">
+                    <a href="employerRegistration.jsp" class = "btn">
                         Работодатель
                     </a>
-                    <a href="Frontend/clientRegistration.jsp" class="btn">
+                    <a href="clientRegistration.jsp" class="btn">
                         Студент
                     </a>
                     <label class ="close" for="mod">+</label>

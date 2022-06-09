@@ -2,6 +2,7 @@ package Entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @NamedQuery(name = "Client.getAll",query = "select c from Client c")
@@ -10,18 +11,18 @@ import java.time.LocalDate;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "\"Id\"", nullable = false)
+    @Column(name = "\"id\"", nullable = false)
     private Integer id;
 
 
-    @Column(name = "\"Name\"", nullable = false)
+    @Column(name = "\"name\"", nullable = false)
     private String name;
 
-    @Column(name = "\"Date\"")
+    @Column(name = "\"date\"")
     private LocalDate date;
 
 
-    @Column(name = "\"Email\"", nullable = false)
+    @Column(name = "\"email\"", nullable = false)
     private String email;
 
 
@@ -29,27 +30,38 @@ public class Client {
     private String login;
 
 
-    @Column(name = "\"Password\"", nullable = false)
+    @Column(name = "\"password\"", nullable = false)
     private String password;
 
 
-    @Column(name = "\"PhoneNumber\"")
+    @Column(name = "\"phoneNumber\"")
     private String phoneNumber;
 
 
-    @Column(name = "\"Adress\"")
+    @Column(name = "\"adress\"")
     private String adress;
 
 
-    @Column(name = "\"AboutMe\"")
+    @Column(name = "\"aboutMe\"")
     private String aboutMe;
 
 
-    @Column(name = "\"StudyPlace\"")
+    @Column(name = "\"studyPlace\"")
     private String studyPlace;
 
-    @Column(name = "\"Photo\"")
+    @Column(name = "\"photo\"")
     private byte[] photo;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Response> responseSet;
+
+    public void setResponseSet(Set<Response> set){
+        this.responseSet = set;
+    }
+
+    public Set<Response> getResponseSet(){
+        return  responseSet;
+    }
 
     public Client(){}
 

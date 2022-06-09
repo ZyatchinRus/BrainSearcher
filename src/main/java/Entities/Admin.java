@@ -9,12 +9,12 @@ import javax.persistence.*;
 public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "\"ID\"", nullable = false)
+    @Column(name = "\"id\"", nullable = false)
     private Integer id;
 
 
 
-    @Column(name = "\"Name\"", nullable = false)
+    @Column(name = "\"name\"", nullable = false)
     private String name;
 
 
@@ -22,7 +22,7 @@ public class Admin {
     private String login;
 
 
-    @Column(name = "\"Password\"", nullable = false)
+    @Column(name = "\"password\"", nullable = false)
     private String password;
 
     public Admin(){}

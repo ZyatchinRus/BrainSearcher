@@ -1,6 +1,7 @@
 package Entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "\"Vacancy\"")
@@ -38,6 +39,8 @@ public class Vacancy {
     @Column(name = "\"WorkSchedule\"")
     private String workSchedule;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Response> responseSet;
 
     @Column(name = "\"Status\"", nullable = false)
     private String status;
@@ -113,5 +116,12 @@ public class Vacancy {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public void setResponses(Set<Response> responseSet){
+        this.responseSet = responseSet;
+    }
+    public Set<Response> getResponseSet(){
+        return responseSet;
     }
 }

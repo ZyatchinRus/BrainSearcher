@@ -1,7 +1,10 @@
 package Entities;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "\"Employer\"")
@@ -10,18 +13,18 @@ import java.time.LocalDate;
 public class Employer {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "\"Id\"", nullable = false)
+    @Column(name = "\"id\"", nullable = false)
     private Integer id;
 
 
-    @Column(name = "\"Name\"", nullable = false)
+    @Column(name = "\"name\"", nullable = false)
     private String name;
 
-    @Column(name = "\"Birthday\"")
+    @Column(name = "\"birthday\"")
     private LocalDate birthday;
 
 
-    @Column(name = "\"Email\"", nullable = false)
+    @Column(name = "\"email\"", nullable = false)
     private String email;
 
 
@@ -29,19 +32,22 @@ public class Employer {
     private String login;
 
 
-    @Column(name = "\"Password\"", nullable = false)
+    @Column(name = "\"password\"", nullable = false)
     private String password;
 
 
-    @Column(name = "\"PhoneNumber\"", nullable = false)
+    @Column(name = "\"phoneNumber\"", nullable = false)
     private String phoneNumber;
 
 
-    @Column(name = "\"WorkPlace\"", nullable = false)
+    @Column(name = "\"workPlace\"", nullable = false)
     private String workPlace;
 
-    @Column(name = "\"Photo\"")
+    @Column(name = "\"photo\"")
     private byte[] photo;
+
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    private Set<Vacancy> vacancySet;
 
     public Employer(){}
 
@@ -115,5 +121,13 @@ public class Employer {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public void setVacancySet(Set<Vacancy> set){
+        this.vacancySet = set;
+    }
+
+    public Set<Vacancy> getVacancySet(){
+        return  vacancySet;
     }
 }

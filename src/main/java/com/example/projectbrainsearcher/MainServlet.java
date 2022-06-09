@@ -11,19 +11,19 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-
 public class MainServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    request.getRequestDispatcher("index.jsp").forward(request,response);
-    }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        if(request.getSession().getAttribute("admin")!=null || request.getSession().getAttribute("employer")!=null || request.getSession().getAttribute("client")!=null){
+            request.getSession().invalidate();
+        }
+        request.getRequestDispatcher("index.jsp").forward(request,response);
+    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String distPage= "index.jsp";
-        String message = "Вы не ввели логин или пароль!";
-        if(request.getParameter("login")!="" && request.getParameter("password")!=""){
             String login = request.getParameter("login");
+            String distPage = "";
             String password = request.getParameter("password");
             AdminEntityManager adminEntityManager = new AdminEntityManager();
             Admin admin = adminEntityManager.getByLogin(login);
@@ -32,31 +32,18 @@ public class MainServlet extends HttpServlet {
             EmployerEntityManager employerEntityManager = new EmployerEntityManager();
             Employer employer = employerEntityManager.getByLogin(login);
             if(admin!=null){
-                if(admin.getPassword().equals(password)){
-                    distPage="pages/persAccountAdmin.jsp";
+                    distPage="/Admin";
                     HttpSession session = request.getSession();
                     session.setAttribute("admin", admin);
-                }else{
-                    message="Неправильный пароль!";
-                }
             }else if(client!=null){
-                if(client.getPassword().equals(password)){
-                    distPage="pages/persAccountClient.jsp";
+                    distPage="/Client";
                     HttpSession session = request.getSession();
                     session.setAttribute("client", client);
-                }else{
-                    message="Неправильный пароль!";
-                }
-            }else if(employer!=null){
-                if(employer.getPassword().equals(password)){
-                    distPage="pages/persAccountEmployer.jsp";
+            }else if(employer!=null) {
+                    distPage = "/Employer";
                     HttpSession session = request.getSession();
                     session.setAttribute("employer", employer);
-                }else{
-                    message="Неправильный пароль!";
-                }
             }
-            request.getRequestDispatcher(distPage).forward(request,response);
-        }
+            response.sendRedirect(distPage);
     }
 }
